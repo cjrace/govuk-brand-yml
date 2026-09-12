@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "GOV.UK brand.yml",
+    "section": "",
+    "text": "An unofficial _brand.yml that themes Bootstrap, bslib and Quarto sites with GOV.UK Design System colours. This page is themed by that same file - what you’re looking at is the demo.\nHere’s a link to the repo - tab to it, or to any button below, to see GOV.UK’s black-and-yellow focus state."
+  },
+  {
+    "objectID": "index.html#typography",
+    "href": "index.html#typography",
+    "title": "GOV.UK brand.yml",
+    "section": "Typography",
+    "text": "Typography\n\nHeading style 1\n\n\nHeading style 2\n\n\nHeading style 3\n\n\nHeading style 4\n\nBody text uses the plain Arial, sans-serif fallback stack (see the README for why GDS Transport isn’t included), with headings set at weight 700. Here’s a sentence with inline code in it."
+  },
+  {
+    "objectID": "index.html#code",
+    "href": "index.html#code",
+    "title": "GOV.UK brand.yml",
+    "section": "Code",
+    "text": "Code\nA short shinyGovstyle example, to show how code blocks and inline code (like button_Input()) are styled:\nui &lt;- shiny::fluidPage(\n  shinyGovstyle::header(\n    org_name = \"Example\",\n    service_name = \"User Examples\",\n    logo = \"shinyGovstyle/images/moj_logo.png\"\n  ),\n  shinyGovstyle::gov_layout(\n    size = \"two-thirds\",\n    shinyGovstyle::button_Input(\n      inputId = \"btn1\",\n      label = \"Continue\",\n      type = \"default\"\n    )\n  ),\n  shinyGovstyle::footer(full = TRUE)\n)"
+  },
+  {
+    "objectID": "index.html#buttons",
+    "href": "index.html#buttons",
+    "title": "GOV.UK brand.yml",
+    "section": "Buttons",
+    "text": "Buttons\nNot strictly GOV.UK style, but those colours applied to Bootstrap defaults.\n\nPrimary\n\n\nSecondary\n\n\nSuccess\n\n\nDanger\n\n\nWarning\n\n\nInfo"
+  },
+  {
+    "objectID": "index.html#callouts",
+    "href": "index.html#callouts",
+    "title": "GOV.UK brand.yml",
+    "section": "Callouts",
+    "text": "Callouts\n\n\n\n\n\n\nNote\n\n\n\nA note callout, coloured from the brand’s info slot.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nA warning callout, coloured from the brand’s warning slot."
+  },
+  {
+    "objectID": "index.html#colour-palette",
+    "href": "index.html#colour-palette",
+    "title": "GOV.UK brand.yml",
+    "section": "Colour palette",
+    "text": "Colour palette\n\nSemantic colours\nThese six map directly onto Bootstrap’s primary / secondary / success / danger / warning / info slots via _brand.yml’s color: section.\n\n\n\n\n\nprimary ← brand-colour\n\n\n\n\n\nsecondary ← secondary-text-colour\n\n\n\n\n\nsuccess ← success-colour\n\n\n\n\n\ndanger ← error-colour\n\n\n\n\n\nwarning ← focus-colour\n\n\n\n\n\ninfo ← link-colour\n\n\n\n\nFull palette\nThe rest of _brand.yml’s palette (text, border and surface tones) has no Bootstrap semantic slot, so these swatches are hardcoded to the current hex values for display.\n\n\n\n\n\ntext-colour#0b0c0c\n\n\n\n\n\nfocus-text-colour#0b0c0c\n\n\n\n\n\nlink-visited-colour#54319f\n\n\n\n\n\nlink-hover-colour#0f385c\n\n\n\n\n\nlink-active-colour#0b0c0c\n\n\n\n\n\nborder-colour#cecece\n\n\n\n\n\nsurface-background-colour#f4f8fb\n\n\n\n\n\nsurface-border-colour#8eb8dc"
+  }
+]
