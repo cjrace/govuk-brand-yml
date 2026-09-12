@@ -2,7 +2,7 @@
 
 A [`_brand.yml`](https://posit-dev.github.io/brand-yml/) theme based on the
 [GOV.UK Design System](https://design-system.service.gov.uk/), for
-Bootstrap-based sites and apps in the R / Quarto ecosystem that want a GOV.UK
+Bootstrap-based sites and apps in the R / Python / Quarto ecosystem that want a GOV.UK
 look (or something to fork from and customise) for minimal effort - built primarily for:
 
 - pkgdown documentation sites
@@ -35,41 +35,58 @@ more detailed styling.
 
 ## Usage
 
-### Quarto
+### 1. Add the files to your project
+
+Copy the file/s into your own project.
+
+[Download `_brand.yml`](https://raw.githubusercontent.com/cjrace/govuk-brand-yml/main/_brand.yml)
+and save it in your project's main folder. If you also want the GOV.UK
+crest available to use, copy the [`logo`
+folder](https://github.com/cjrace/govuk-brand-yml/tree/main/logo) in too
+(see [Logo and crest](#logo-and-crest) below for how to show it).
+
+If you're adding this to an R package (for example, to theme a pkgdown
+site), put `_brand.yml` inside the package's `inst/` folder instead, so
+that checking the package doesn't produce a note.
+
+### 2. Point your project at it
+
+**Quarto:**
 
 ```yaml
 # _quarto.yml
 brand: _brand.yml
 ```
 
-Quarto can also auto-detect a `_brand.yml` in the project root.
+Quarto can also find a `_brand.yml` in your project's main folder
+automatically, so you can try skipping this.
 
-### bslib / Shiny
+**Shiny apps (using bslib):**
 
 ```r
-bslib::bs_theme(brand = TRUE) # auto-detects ./_brand.yml, requires bslib >= 0.9.0
+bslib::bs_theme(brand = TRUE) # finds ./_brand.yml automatically, needs bslib 0.9.0 or later
 ```
 
-## Using this in an R package
-
-### pkgdown
-
-Save in the `inst/` folder to avoid R CMD check notes.
+**pkgdown sites:**
 
 ```yaml
 # _pkgdown.yml
 template:
   bootstrap: 5
   bslib:
-    brand: _brand.yml
+    brand: inst/_brand.yml
 ```
 
-### Keep it updated
+## Keeping your copy up to date
 
-There's several reasons not to use a URL to pull in the theme live, so
-use a scheduled GitHub Action to copy a version into your own repo and 
-then monitor for updates. The example below will open a PR whenever 
-there's a difference noticed instead of re-syncing it by hand:
+Once you've copied `_brand.yml` into your project, it won't update on its
+own, you're keeping your own copy. Colours and fonts here don't change
+often, but when they do, it's easy to miss.
+
+Suggested approach is to add this GitHub Action to your project. Once a week, it
+checks whether this repo's `_brand.yml` has changed, and if so, opens a
+pull request with the update for you to review, so you don't have to
+check by hand.
 
 ```yaml
 # .github/workflows/update-govuk-brand.yml
@@ -78,7 +95,7 @@ name: Update GOV.UK brand.yml
 on:
   schedule:
     - cron: "0 6 * * 1" # every Monday
-  workflow_dispatch: # on demand
+  workflow_dispatch: # lets you also run this on demand
 
 jobs:
   update-brand:
@@ -89,27 +106,26 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Fetch latest _brand.yml
+      - name: Fetch the latest _brand.yml
         run: |
-          curl -sL -o inst/govuk-brand.yml \
+          curl -sL -o inst/_brand.yml \
             https://raw.githubusercontent.com/cjrace/govuk-brand-yml/main/_brand.yml
 
-      - name: Open a PR if it changed
+      - name: Open a pull request if it changed
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: "Update vendored GOV.UK brand.yml"
+          commit-message: "Update GOV.UK brand.yml"
           title: "Update GOV.UK brand.yml"
           body: >
             Pulls the latest `_brand.yml` from
             [cjrace/govuk-brand-yml](https://github.com/cjrace/govuk-brand-yml) -
-            review the updates before merging.
+            review the changes before merging.
           branch: update-govuk-brand
-          add-paths: inst/govuk-brand.yml
+          add-paths: inst/_brand.yml
 ```
 
-```r
-bslib::bs_theme(brand = system.file("govuk-brand.yml", package = "yourpackage"))
-```
+Change the file path in the last two steps (`inst/_brand.yml`) to match
+wherever you saved your copy, just `_brand.yml` if you want it in the root of your project.
 
 ## No GDS Transport font
 
@@ -186,13 +202,12 @@ department)? Fork this repo and change:
 - **`scripts/update-tokens.sh`** - this pulls specifically from
   govuk-frontend's published npm package, so either update or drop it.
 
-## Keeping this up to date
+## Keeping this repo up to date
 
 Colours are static, copied from a specific GOV.UK Frontend version, not
-tracked automatically. Run the following to overwrite
+tracked automatically. I run the following to overwrite
 `_brand.yml`'s palette, and the matching swatches in `index.qmd`'s
-showcase, with the latest release's tokens. Then review changes in Git
-before committing.
+showcase.
 
 ```bash
 scripts/update-tokens.sh
