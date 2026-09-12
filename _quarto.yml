@@ -1,0 +1,16 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "govuk-brand-yml"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Showcase
+      - href: https://github.com/cjrace/govuk-brand-yml
+        text: GitHub
+
+brand: _brand.yml
+
+format: html

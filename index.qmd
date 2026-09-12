@@ -1,0 +1,102 @@
+---
+title: "GOV.UK brand.yml"
+---
+
+An unofficial [`_brand.yml`](https://github.com/cjrace/govuk-brand-yml) that
+themes Bootstrap, bslib and Quarto sites with GOV.UK Design System colours.
+This page is themed by that same file - what you're looking at *is* the
+demo.
+
+Here's a [link to the repo](https://github.com/cjrace/govuk-brand-yml) -
+tab to it, or to any button below, to see GOV.UK's black-and-yellow focus
+state.
+
+## Typography
+
+<p class="h1">Heading style 1</p>
+<p class="h2">Heading style 2</p>
+<p class="h3">Heading style 3</p>
+<p class="h4">Heading style 4</p>
+
+Body text uses the plain `Arial, sans-serif` fallback stack (see the
+README for why GDS Transport isn't included), with headings set at weight
+700. Here's a sentence with `inline code` in it.
+
+## Code
+
+A short [shinyGovstyle](https://github.com/dfe-analytical-services/shinyGovstyle)
+example, to show how code blocks and inline code (like `button_Input()`)
+are styled:
+
+```r
+ui <- shiny::fluidPage(
+  shinyGovstyle::header(
+    org_name = "Example",
+    service_name = "User Examples",
+    logo = "shinyGovstyle/images/moj_logo.png"
+  ),
+  shinyGovstyle::gov_layout(
+    size = "two-thirds",
+    shinyGovstyle::button_Input(
+      inputId = "btn1",
+      label = "Continue",
+      type = "default"
+    )
+  ),
+  shinyGovstyle::footer(full = TRUE)
+)
+```
+
+## Buttons
+
+Not strictly GOV.UK style, but those colours applied to Bootstrap defaults.
+
+<button class="btn btn-primary me-2 mb-2">Primary</button>
+<button class="btn btn-secondary me-2 mb-2">Secondary</button>
+<button class="btn btn-success me-2 mb-2">Success</button>
+<button class="btn btn-danger me-2 mb-2">Danger</button>
+<button class="btn btn-warning me-2 mb-2">Warning</button>
+<button class="btn btn-info me-2 mb-2">Info</button>
+
+## Callouts
+
+::: {.callout-note}
+A note callout, coloured from the brand's `info` slot.
+:::
+
+::: {.callout-warning}
+A warning callout, coloured from the brand's `warning` slot.
+:::
+
+## Colour palette
+
+### Semantic colours
+
+These six map directly onto Bootstrap's `primary` / `secondary` / `success`
+/ `danger` / `warning` / `info` slots via `_brand.yml`'s `color:` section.
+
+<div class="row row-cols-2 row-cols-md-3 g-3 mb-4">
+<div class="col"><div class="bg-primary" style="height: 70px;"></div><small>primary &larr; brand-colour</small></div>
+<div class="col"><div class="bg-secondary" style="height: 70px;"></div><small>secondary &larr; secondary-text-colour</small></div>
+<div class="col"><div class="bg-success" style="height: 70px;"></div><small>success &larr; success-colour</small></div>
+<div class="col"><div class="bg-danger" style="height: 70px;"></div><small>danger &larr; error-colour</small></div>
+<div class="col"><div class="bg-warning" style="height: 70px;"></div><small>warning &larr; focus-colour</small></div>
+<div class="col"><div class="bg-info" style="height: 70px;"></div><small>info &larr; link-colour</small></div>
+</div>
+
+### Full palette
+
+The rest of `_brand.yml`'s palette (text, border and surface tones) has no
+Bootstrap semantic slot, so these swatches are hardcoded to the current hex
+values for display.
+
+<div class="row row-cols-2 row-cols-md-4 g-3">
+<div class="col"><div style="background-color:#0b0c0c; height: 70px; border: 1px solid #00000022;"></div><small>text-colour<br>#0b0c0c</small></div>
+<div class="col"><div style="background-color:#0b0c0c; height: 70px; border: 1px solid #00000022;"></div><small>focus-text-colour<br>#0b0c0c</small></div>
+<div class="col"><div style="background-color:#54319f; height: 70px; border: 1px solid #00000022;"></div><small>link-visited-colour<br>#54319f</small></div>
+<div class="col"><div style="background-color:#0f385c; height: 70px; border: 1px solid #00000022;"></div><small>link-hover-colour<br>#0f385c</small></div>
+<div class="col"><div style="background-color:#0b0c0c; height: 70px; border: 1px solid #00000022;"></div><small>link-active-colour<br>#0b0c0c</small></div>
+<div class="col"><div style="background-color:#cecece; height: 70px; border: 1px solid #00000022;"></div><small>border-colour<br>#cecece</small></div>
+<div class="col"><div style="background-color:#f4f8fb; height: 70px; border: 1px solid #00000022;"></div><small>surface-background-colour<br>#f4f8fb</small></div>
+<div class="col"><div style="background-color:#8eb8dc; height: 70px; border: 1px solid #00000022;"></div><small>surface-border-colour<br>#8eb8dc</small></div>
+</div>
