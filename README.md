@@ -77,55 +77,61 @@ template:
     brand: inst/_brand.yml
 ```
 
-## Keeping your copy up to date
+**pkgdown's navbar doesn't inherit these colours automatically.** pkgdown
+adds its own navbar/dropdown/TOC Sass *after* `_brand.yml`'s rules are
+compiled in, and that Sass dilutes or overrides them (its navbar background
+is a light `color-mix()` tint of `$primary`, not `$primary` itself) - so this
+can't be fixed from inside `_brand.yml`. Fix it with a
+[`pkgdown/extra.scss`](https://pkgdown.r-lib.org/articles/customise.html#sass)
+file in your package instead, which pkgdown compiles in last. The navbar rule
+needs `!important` - pkgdown puts a `bg-light` utility class directly on the
+navbar element, and Bootstrap's `.bg-light` sets `background-color` with
+`!important`, which otherwise wins regardless of cascade order:
 
-Once you've copied `_brand.yml` into your project, it won't update on its
-own, you're keeping your own copy. Colours and fonts here don't change
-often, but when they do, it's easy to miss.
+```scss
+// pkgdown/extra.scss
+.navbar {
+  background-color: $primary !important;
+}
 
-Suggested approach is to add this GitHub Action to your project. Once a week, it
-checks whether this repo's `_brand.yml` has changed, and if so, opens a
-pull request with the update for you to review, so you don't have to
-check by hand.
+.navbar-brand,
+.navbar-nav .nav-link,
+.navbar-nav .dropdown-toggle {
+  color: #fff;
+}
 
-```yaml
-# .github/workflows/update-govuk-brand.yml
-name: Update GOV.UK brand.yml
+.navbar .nav-text.text-muted {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
 
-on:
-  schedule:
-    - cron: "0 6 * * 1" # every Monday
-  workflow_dispatch: # lets you also run this on demand
+.navbar-toggler-icon {
+  filter: invert(1);
+}
 
-jobs:
-  update-brand:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v7
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
 
-      - name: Fetch the latest _brand.yml
-        run: |
-          curl -sL -o inst/_brand.yml \
-            https://raw.githubusercontent.com/cjrace/govuk-brand-yml/main/_brand.yml
-
-      - name: Open a pull request if it changed
-        uses: peter-evans/create-pull-request@v7
-        with:
-          commit-message: "Update GOV.UK brand.yml"
-          title: "Update GOV.UK brand.yml"
-          body: >
-            Pulls the latest `_brand.yml` from
-            [cjrace/govuk-brand-yml](https://github.com/cjrace/govuk-brand-yml) -
-            review the changes before merging.
-          branch: update-govuk-brand
-          add-paths: inst/_brand.yml
+.navbar-brand:hover,
+.navbar-brand:focus,
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .dropdown-toggle:hover,
+.navbar-nav .dropdown-toggle:focus,
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+#toc > .nav a.nav-link:hover,
+#toc > .nav a.nav-link:focus {
+  color: $body-color;
+  background-color: $warning;
+}
 ```
 
-Change the file path in the last two steps (`inst/_brand.yml`) to match
-wherever you saved your copy, just `_brand.yml` if you want it in the root of your project.
+This gives the navbar a solid GOV.UK blue background, white nav links and
+GitHub icon (pkgdown auto-generates that one; brand.yml has no opinion on
+it), a visible mobile nav toggler, and GOV.UK's black-on-yellow highlight on
+hover/focus for the site title, nav links, the Articles dropdown menu, and
+the "On this page" TOC sidebar.
 
 ## No GDS Transport font
 
