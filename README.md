@@ -1,31 +1,19 @@
 # govuk-brand-yml
 
-A [`_brand.yml`](https://posit-dev.github.io/brand-yml/) theme based on the
-[GOV.UK Design System](https://design-system.service.gov.uk/), for
-Bootstrap-based sites and apps in the R / Python / Quarto ecosystem that want a GOV.UK
-look (or something to fork from and customise) for minimal effort - built primarily for:
-
-- pkgdown documentation sites
-- Simple Quarto documents
-
-But also works with:
-
-- Shiny apps built with `bslib`
-- Quarto slides
-- Python projects
+A [`_brand.yml`](https://posit-dev.github.io/brand-yml/) theme that gives
+Bootstrap-based sites and apps a GOV.UK look with minimal effort. Built
+primarily for pkgdown sites and simple Quarto documents, but also works
+with `bslib` Shiny apps, Quarto slides, and Python projects.
 
 **Live showcase: <https://cjrace.github.io/govuk-brand-yml/>**
 
 ## When to use this vs. the alternatives
 
-Use this for a speedy GOV.UK feel on a pkgdown site, or a Quarto
-project where standard Bootstrap components are fine.
+Use this for a quick GOV.UK feel on a pkgdown site or Quarto project where
+standard Bootstrap components are fine, in line with `_brand.yml`'s own
+philosophy, it is 'good enough' theming, not a full component library.
 
-In line with the [`_brand.yml`](https://posit-dev.github.io/brand-yml/)
-philosophy, this is intended only as 'good enough' theming.
-
-Use the other existing projects when you need actual GOV.UK components and
-more detailed styling.
+Use one of these instead when you need actual GOV.UK components:
 
 | Project | Fidelity | Scope |
 |---|---|---|
@@ -40,10 +28,10 @@ more detailed styling.
 Copy the file/s into your own project.
 
 [Download `_brand.yml`](https://raw.githubusercontent.com/cjrace/govuk-brand-yml/main/_brand.yml)
-and save it in your project's main folder. If you also want the GOV.UK
-crest available to use, copy the [`logo`
-folder](https://github.com/cjrace/govuk-brand-yml/tree/main/logo) in too
-(see [Logo and crest](#logo-and-crest) below for how to show it).
+and save it in your project's main folder. Also copy the [`logo`
+folder](https://github.com/cjrace/govuk-brand-yml/tree/main/logo) in, so
+the GOV.UK crest it references is available (see [Logo and
+crest](#logo-and-crest) below).
 
 If you're adding this to an R package (for example, to theme a pkgdown
 site), put `_brand.yml` inside the package's `inst/` folder instead, so
@@ -78,15 +66,12 @@ template:
 ```
 
 **pkgdown's navbar doesn't inherit these colours automatically.** pkgdown
-adds its own navbar/dropdown/TOC Sass *after* `_brand.yml`'s rules are
-compiled in, and that Sass dilutes or overrides them (its navbar background
-is a light `color-mix()` tint of `$primary`, not `$primary` itself) - so this
-can't be fixed from inside `_brand.yml`. Fix it with a
+compiles its own navbar/dropdown/TOC Sass *after* `_brand.yml`, which
+dilutes or overrides it (the navbar background ends up a light
+`color-mix()` tint of `$primary`, not `$primary` itself). Fix it with a
 [`pkgdown/extra.scss`](https://pkgdown.r-lib.org/articles/customise.html#sass)
-file in your package instead, which pkgdown compiles in last. The navbar rule
-needs `!important` - pkgdown puts a `bg-light` utility class directly on the
-navbar element, and Bootstrap's `.bg-light` sets `background-color` with
-`!important`, which otherwise wins regardless of cascade order:
+file instead, like the one below. The navbar rule needs
+`!important` because pkgdown's own `.bg-light` navbar class uses it too:
 
 ```scss
 // pkgdown/extra.scss
@@ -128,64 +113,36 @@ navbar element, and Bootstrap's `.bg-light` sets `background-color` with
 ```
 
 This gives the navbar a solid GOV.UK blue background, white nav links and
-GitHub icon (pkgdown auto-generates that one; brand.yml has no opinion on
-it), a visible mobile nav toggler, and GOV.UK's black-on-yellow highlight on
-hover/focus for the site title, nav links, the Articles dropdown menu, and
-the "On this page" TOC sidebar.
+icons, a visible mobile nav toggler, and GOV.UK's black-on-yellow
+hover/focus highlight on the site title, nav links, dropdown menu, and
+"On this page" sidebar.
 
 ## No GDS Transport font
 
-GOV.UK's typeface, GDS Transport, is licensed for `*.gov.uk` services only -
-it's deliberately not included here, not even as a fallback reference. The
-font stack is the plain `Arial, sans-serif` GOV.UK Frontend itself falls
-back to.
+GOV.UK's typeface (GDS Transport) is `*.gov.uk`-only, so it's not included
+here. This uses the plain `Arial, sans-serif` fallback GOV.UK Frontend
+itself falls back to.
 
 ## Logo and crest
 
 `logo/govuk-crest.svg` and `logo/favicon.ico` come from
-[GOV.UK Frontend](https://github.com/alphagov/govuk-frontend) (MIT).
+[GOV.UK Frontend](https://github.com/alphagov/govuk-frontend) (MIT). Copy
+the `logo` folder into your project and `_brand.yml` shows the crest in a
+Quarto website navbar by default.
 
-The crest is **hidden by default** in a Quarto website navbar (via a
-`.navbar-logo { display: none }` rule in `_brand.yml`) and isn't shown
-anywhere in this repo's own showcase page. This follows the [GOV.UK Design
-System's own
-guidance](https://design-system.service.gov.uk/components/header/#when-not-to-use-this-component):
-the GOV.UK header is reserved for services actually hosted on a
-`gov.uk` domain - if that's not you, don't show it there either.
-
-### Showing the crest
-
-Internal government documents (a departmental style guide, an internal
-Quarto report, an internal pkgdown site) are a reasonable case for wanting
-the crest even off a `gov.uk` domain. To show it, copy the logo folder in and 
-override the rule in your own site's CSS - e.g. in `_quarto.yml`:
-
-```yaml
-format:
-  html:
-    css: my-overrides.css
-```
+**Consider whether you should show it.** GOV.UK's [own
+guidance](https://design-system.service.gov.uk/components/header/#when-not-to-use-this-component)
+reserves the crest for services actually hosted on a `gov.uk` domain. If
+that's not you, change the logo, or hide it in your own site's CSS instead:
 
 ```css
-/* my-overrides.css */
-.navbar-logo { display: inline-block !important; }
-```
-
-Or drop it in inline, anywhere in the page, if you just want it on that one
-document:
-
-```markdown
-![](logo/govuk-crest.svg){width="35px"}
+.navbar-logo { display: none !important; }
 ```
 
 **pkgdown doesn't use any of this.** Its navbar logo is a separate, older
 convention - it auto-detects `logo.svg`/`man/figures/logo.svg`/`logo.png`/
 `man/figures/logo.png` in your package and shows that, regardless of
-`_brand.yml`. To add the crest there, copy it in yourself:
-
-```bash
-cp path/to/govuk-brand-yml/logo/govuk-crest.svg man/figures/logo.svg
-```
+`_brand.yml`. To add the crest there, copy it in yourself. To hide it, don't.
 
 ## Quarto slides (revealjs)
 
