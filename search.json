@@ -25,20 +25,20 @@
     "href": "index.html#buttons",
     "title": "GOV.UK brand.yml",
     "section": "Buttons",
-    "text": "Buttons\nNot strictly GOV.UK style, but those colours applied to Bootstrap defaults.\n\nPrimary\n\n\nSecondary\n\n\nSuccess\n\n\nDanger\n\n\nWarning\n\n\nInfo"
+    "text": "Buttons\nBootstrap buttons styled after GOV.UK’s: square corners, a darker bottom shadow, a darker hover and a pressed state. Success matches GOV.UK’s default button, danger its warning button, secondary its secondary button, and info its inverse button. Warning uses palette orange, as GOV.UK keeps yellow for focus only.\n\nPrimary\n\n\nSecondary\n\n\nSuccess\n\n\nDanger\n\n\nWarning\n\n\nInfo"
   },
   {
     "objectID": "index.html#callouts",
     "href": "index.html#callouts",
     "title": "GOV.UK brand.yml",
     "section": "Callouts",
-    "text": "Callouts\n\n\n\n\n\n\nNote\n\n\n\nA note callout, coloured from the brand’s info slot.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nA warning callout, coloured from the brand’s warning slot."
+    "text": "Callouts\n\n\n\n\n\n\nNote\n\n\n\nA note callout, coloured from the brand’s info slot.\n\n\n\n\n\n\n\n\nTip\n\n\n\nA tip callout, coloured from the brand’s success slot.\n\n\n\n\n\n\n\n\nImportant\n\n\n\nAn important callout, coloured from the brand’s danger slot.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nA warning callout, coloured from the brand’s warning slot.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nA caution callout, coloured from text-colour, like GOV.UK’s warning text icon."
   },
   {
     "objectID": "index.html#colour-palette",
     "href": "index.html#colour-palette",
     "title": "GOV.UK brand.yml",
     "section": "Colour palette",
-    "text": "Colour palette\n\nSemantic colours\nThese six map directly onto Bootstrap’s primary / secondary / success / danger / warning / info slots via _brand.yml’s color: section.\n\n\n\n\n\nprimary ← brand-colour\n\n\n\n\n\nsecondary ← secondary-text-colour\n\n\n\n\n\nsuccess ← success-colour\n\n\n\n\n\ndanger ← error-colour\n\n\n\n\n\nwarning ← focus-colour\n\n\n\n\n\ninfo ← link-colour\n\n\n\n\nFull palette\nThe rest of _brand.yml’s palette (text, border and surface tones) has no Bootstrap semantic slot, so these swatches are hardcoded to the current hex values for display.\n\n\n\n\n\ntext-colour#0b0c0c\n\n\n\n\n\nfocus-text-colour#0b0c0c\n\n\n\n\n\nlink-visited-colour#54319f\n\n\n\n\n\nlink-hover-colour#0f385c\n\n\n\n\n\nlink-active-colour#0b0c0c\n\n\n\n\n\nborder-colour#cecece\n\n\n\n\n\nsurface-background-colour#f4f8fb\n\n\n\n\n\nsurface-border-colour#8eb8dc"
+    "text": "Colour palette\nEvery colour in _brand.yml, and where Bootstrap uses it. Swatches are hardcoded for display - scripts/update-tokens.sh keeps the GOV.UK token rows in sync.\n\n\n\n\n\n\n\n\n\n\n\nGOV.UK colour name\nUse\nHex code\nColour example\nBootstrap mapping\n\n\n\n\nbrand-colour\nBrand elements, e.g. header\n#1d70b8\n\nprimary\n\n\ntext-colour\nDefault text\n#0b0c0c\n\nforeground (body text)\n\n\nsecondary-text-colour\nSecondary text\n#484949\n\n-\n\n\nerror-colour\nError messages\n#ca3535\n\ndanger\n\n\nsuccess-colour\nSuccess messages\n#0f7a52\n\nsuccess\n\n\nfocus-colour\nFocused elements only\n#ffdd00\n\nFocus styles (custom rules)\n\n\nfocus-text-colour\nText on focused elements\n#0b0c0c\n\n-\n\n\nlink-colour\nLinks\n#1a65a6\n\ninfo, link colour\n\n\nlink-visited-colour\nVisited links\n#54319f\n\n-\n\n\nlink-hover-colour\nHovered links\n#0f385c\n\nlink-hover-color\n\n\nlink-active-colour\nActive links\n#0b0c0c\n\n-\n\n\nborder-colour\nBorders\n#cecece\n\n-\n\n\nsurface-background-colour\nSurface backgrounds\n#f4f8fb\n\n-\n\n\nsurface-border-colour\nSurface borders\n#8eb8dc\n\n-\n\n\ncode-background-colour\nCode blocks\n#f3f3f3\n\nCode background\n\n\nsecondary-button-colour\nSecondary buttons\n#f3f3f3\n\nsecondary\n\n\norange\nWeb palette orange\n#f47738\n\nwarning\n\n\nwhite\nPage background\n#ffffff\n\nbackground"
   }
 ]

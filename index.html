@@ -83,9 +83,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-6cdaf55d168568cfe73708e88b562b88.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d99f408553e2f7bded63590783ee89da.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-d99f408553e2f7bded63590783ee89da.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-d99f408553e2f7bded63590783ee89da.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-438b31331bd809a7b38ef03a8e6e4d46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-438b31331bd809a7b38ef03a8e6e4d46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-438b31331bd809a7b38ef03a8e6e4d46.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -220,7 +220,7 @@ Heading style 4
 </section>
 <section id="buttons" class="level2">
 <h2 class="anchored" data-anchor-id="buttons">Buttons</h2>
-<p>Not strictly GOV.UK style, but those colours applied to Bootstrap defaults.</p>
+<p>Bootstrap buttons styled after GOV.UK’s: square corners, a darker bottom shadow, a darker hover and a pressed state. Success matches GOV.UK’s default button, danger its warning button, secondary its secondary button, and info its inverse button. Warning uses palette orange, as GOV.UK keeps yellow for focus only.</p>
 <button class="btn btn-primary me-2 mb-2">
 Primary
 </button>
@@ -255,6 +255,32 @@ Note
 <p>A note callout, coloured from the brand’s <code>info</code> slot.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A tip callout, coloured from the brand’s <code>success</code> slot.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An important callout, coloured from the brand’s <code>danger</code> slot.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -268,107 +294,180 @@ Warning
 <p>A warning callout, coloured from the brand’s <code>warning</code> slot.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A caution callout, coloured from <code>text-colour</code>, like GOV.UK’s warning text icon.</p>
+</div>
+</div>
 </section>
 <section id="colour-palette" class="level2">
 <h2 class="anchored" data-anchor-id="colour-palette">Colour palette</h2>
-<section id="semantic-colours" class="level3">
-<h3 class="anchored" data-anchor-id="semantic-colours">Semantic colours</h3>
-<p>These six map directly onto Bootstrap’s <code>primary</code> / <code>secondary</code> / <code>success</code> / <code>danger</code> / <code>warning</code> / <code>info</code> slots via <code>_brand.yml</code>’s <code>color:</code> section.</p>
-<div class="row row-cols-2 row-cols-md-3 g-3 mb-4">
-<div class="col">
-<div class="bg-primary" style="height: 70px;">
+<p>Every colour in <code>_brand.yml</code>, and where Bootstrap uses it. Swatches are hardcoded for display - <code>scripts/update-tokens.sh</code> keeps the GOV.UK token rows in sync.</p>
+<style>
+.swatch {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #00000022;
+  vertical-align: middle;
+}
+</style>
+<table class="table-sm small caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>GOV.UK colour name</th>
+<th>Use</th>
+<th>Hex code</th>
+<th>Colour example</th>
+<th>Bootstrap mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>brand-colour</code></td>
+<td>Brand elements, e.g.&nbsp;header</td>
+<td><code>#1d70b8</code></td>
+<td><span class="swatch" style="background-color:#1d70b8;"></span></td>
+<td><code>primary</code></td>
+</tr>
+<tr class="even">
+<td><code>text-colour</code></td>
+<td>Default text</td>
+<td><code>#0b0c0c</code></td>
+<td><span class="swatch" style="background-color:#0b0c0c;"></span></td>
+<td><code>foreground</code> (body text)</td>
+</tr>
+<tr class="odd">
+<td><code>secondary-text-colour</code></td>
+<td>Secondary text</td>
+<td><code>#484949</code></td>
+<td><span class="swatch" style="background-color:#484949;"></span></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>error-colour</code></td>
+<td>Error messages</td>
+<td><code>#ca3535</code></td>
+<td><span class="swatch" style="background-color:#ca3535;"></span></td>
+<td><code>danger</code></td>
+</tr>
+<tr class="odd">
+<td><code>success-colour</code></td>
+<td>Success messages</td>
+<td><code>#0f7a52</code></td>
+<td><span class="swatch" style="background-color:#0f7a52;"></span></td>
+<td><code>success</code></td>
+</tr>
+<tr class="even">
+<td><code>focus-colour</code></td>
+<td>Focused elements only</td>
+<td><code>#ffdd00</code></td>
+<td><span class="swatch" style="background-color:#ffdd00;"></span></td>
+<td>Focus styles (custom rules)</td>
+</tr>
+<tr class="odd">
+<td><code>focus-text-colour</code></td>
+<td>Text on focused elements</td>
+<td><code>#0b0c0c</code></td>
+<td><span class="swatch" style="background-color:#0b0c0c;"></span></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>link-colour</code></td>
+<td>Links</td>
+<td><code>#1a65a6</code></td>
+<td><span class="swatch" style="background-color:#1a65a6;"></span></td>
+<td><code>info</code>, link colour</td>
+</tr>
+<tr class="odd">
+<td><code>link-visited-colour</code></td>
+<td>Visited links</td>
+<td><code>#54319f</code></td>
+<td><span class="swatch" style="background-color:#54319f;"></span></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>link-hover-colour</code></td>
+<td>Hovered links</td>
+<td><code>#0f385c</code></td>
+<td><span class="swatch" style="background-color:#0f385c;"></span></td>
+<td><code>link-hover-color</code></td>
+</tr>
+<tr class="odd">
+<td><code>link-active-colour</code></td>
+<td>Active links</td>
+<td><code>#0b0c0c</code></td>
+<td><span class="swatch" style="background-color:#0b0c0c;"></span></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>border-colour</code></td>
+<td>Borders</td>
+<td><code>#cecece</code></td>
+<td><span class="swatch" style="background-color:#cecece;"></span></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><code>surface-background-colour</code></td>
+<td>Surface backgrounds</td>
+<td><code>#f4f8fb</code></td>
+<td><span class="swatch" style="background-color:#f4f8fb;"></span></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>surface-border-colour</code></td>
+<td>Surface borders</td>
+<td><code>#8eb8dc</code></td>
+<td><span class="swatch" style="background-color:#8eb8dc;"></span></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><code>code-background-colour</code></td>
+<td>Code blocks</td>
+<td><code>#f3f3f3</code></td>
+<td><span class="swatch" style="background-color:#f3f3f3;"></span></td>
+<td>Code background</td>
+</tr>
+<tr class="even">
+<td><code>secondary-button-colour</code></td>
+<td>Secondary buttons</td>
+<td><code>#f3f3f3</code></td>
+<td><span class="swatch" style="background-color:#f3f3f3;"></span></td>
+<td><code>secondary</code></td>
+</tr>
+<tr class="odd">
+<td><code>orange</code></td>
+<td>Web palette orange</td>
+<td><code>#f47738</code></td>
+<td><span class="swatch" style="background-color:#f47738;"></span></td>
+<td><code>warning</code></td>
+</tr>
+<tr class="even">
+<td><code>white</code></td>
+<td>Page background</td>
+<td><code>#ffffff</code></td>
+<td><span class="swatch" style="background-color:#ffffff;"></span></td>
+<td><code>background</code></td>
+</tr>
+</tbody>
+</table>
 
-</div>
-<small>primary ← brand-colour</small>
-</div>
-<div class="col">
-<div class="bg-secondary" style="height: 70px;">
 
-</div>
-<small>secondary ← secondary-text-colour</small>
-</div>
-<div class="col">
-<div class="bg-success" style="height: 70px;">
-
-</div>
-<small>success ← success-colour</small>
-</div>
-<div class="col">
-<div class="bg-danger" style="height: 70px;">
-
-</div>
-<small>danger ← error-colour</small>
-</div>
-<div class="col">
-<div class="bg-warning" style="height: 70px;">
-
-</div>
-<small>warning ← focus-colour</small>
-</div>
-<div class="col">
-<div class="bg-info" style="height: 70px;">
-
-</div>
-<small>info ← link-colour</small>
-</div>
-</div>
-</section>
-<section id="full-palette" class="level3">
-<h3 class="anchored" data-anchor-id="full-palette">Full palette</h3>
-<p>The rest of <code>_brand.yml</code>’s palette (text, border and surface tones) has no Bootstrap semantic slot, so these swatches are hardcoded to the current hex values for display.</p>
-<div class="row row-cols-2 row-cols-md-4 g-3">
-<div class="col">
-<div style="background-color:#0b0c0c; height: 70px; border: 1px solid #00000022;">
-
-</div>
-<small>text-colour<br>#0b0c0c</small>
-</div>
-<div class="col">
-<div style="background-color:#0b0c0c; height: 70px; border: 1px solid #00000022;">
-
-</div>
-<small>focus-text-colour<br>#0b0c0c</small>
-</div>
-<div class="col">
-<div style="background-color:#54319f; height: 70px; border: 1px solid #00000022;">
-
-</div>
-<small>link-visited-colour<br>#54319f</small>
-</div>
-<div class="col">
-<div style="background-color:#0f385c; height: 70px; border: 1px solid #00000022;">
-
-</div>
-<small>link-hover-colour<br>#0f385c</small>
-</div>
-<div class="col">
-<div style="background-color:#0b0c0c; height: 70px; border: 1px solid #00000022;">
-
-</div>
-<small>link-active-colour<br>#0b0c0c</small>
-</div>
-<div class="col">
-<div style="background-color:#cecece; height: 70px; border: 1px solid #00000022;">
-
-</div>
-<small>border-colour<br>#cecece</small>
-</div>
-<div class="col">
-<div style="background-color:#f4f8fb; height: 70px; border: 1px solid #00000022;">
-
-</div>
-<small>surface-background-colour<br>#f4f8fb</small>
-</div>
-<div class="col">
-<div style="background-color:#8eb8dc; height: 70px; border: 1px solid #00000022;">
-
-</div>
-<small>surface-border-colour<br>#8eb8dc</small>
-</div>
-</div>
-
-
-</section>
 </section>
 
 </main> <!-- /main -->
