@@ -49,7 +49,11 @@ ui <- shiny::fluidPage(
 
 ## Buttons
 
-Not strictly GOV.UK style, but those colours applied to Bootstrap defaults.
+Bootstrap buttons styled after GOV.UK's: square corners, a darker bottom
+shadow, a darker hover and a pressed state. Success matches GOV.UK's default
+button, danger its warning button, secondary its secondary button, and info
+its inverse button. Warning uses palette orange, as GOV.UK keeps yellow for
+focus only.
 
 <button class="btn btn-primary me-2 mb-2">Primary</button>
 <button class="btn btn-secondary me-2 mb-2">Secondary</button>
@@ -64,39 +68,59 @@ Not strictly GOV.UK style, but those colours applied to Bootstrap defaults.
 A note callout, coloured from the brand's `info` slot.
 :::
 
+::: {.callout-tip}
+A tip callout, coloured from the brand's `success` slot.
+:::
+
+::: {.callout-important}
+An important callout, coloured from the brand's `danger` slot.
+:::
+
 ::: {.callout-warning}
 A warning callout, coloured from the brand's `warning` slot.
 :::
 
+::: {.callout-caution}
+A caution callout, coloured from `text-colour`, like GOV.UK's warning text icon.
+:::
+
 ## Colour palette
 
-### Semantic colours
+Every colour in `_brand.yml`, and where Bootstrap uses it. Swatches are
+hardcoded for display - `scripts/update-tokens.sh` keeps the GOV.UK token
+rows in sync.
 
-These six map directly onto Bootstrap's `primary` / `secondary` / `success`
-/ `danger` / `warning` / `info` slots via `_brand.yml`'s `color:` section.
+```{=html}
+<style>
+.swatch {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #00000022;
+  vertical-align: middle;
+}
+</style>
+```
 
-<div class="row row-cols-2 row-cols-md-3 g-3 mb-4">
-<div class="col"><div class="bg-primary" style="height: 70px;"></div><small>primary &larr; brand-colour</small></div>
-<div class="col"><div class="bg-secondary" style="height: 70px;"></div><small>secondary &larr; secondary-text-colour</small></div>
-<div class="col"><div class="bg-success" style="height: 70px;"></div><small>success &larr; success-colour</small></div>
-<div class="col"><div class="bg-danger" style="height: 70px;"></div><small>danger &larr; error-colour</small></div>
-<div class="col"><div class="bg-warning" style="height: 70px;"></div><small>warning &larr; focus-colour</small></div>
-<div class="col"><div class="bg-info" style="height: 70px;"></div><small>info &larr; link-colour</small></div>
-</div>
+| GOV.UK colour name | Use | Hex code | Colour example | Bootstrap mapping |
+|---|---|---|---|---|
+| `brand-colour` | Brand elements, e.g. header | `#1d70b8` | <span class="swatch" style="background-color:#1d70b8;"></span> | `primary` |
+| `text-colour` | Default text | `#0b0c0c` | <span class="swatch" style="background-color:#0b0c0c;"></span> | `foreground` (body text) |
+| `secondary-text-colour` | Secondary text | `#484949` | <span class="swatch" style="background-color:#484949;"></span> | - |
+| `error-colour` | Error messages | `#ca3535` | <span class="swatch" style="background-color:#ca3535;"></span> | `danger` |
+| `success-colour` | Success messages | `#0f7a52` | <span class="swatch" style="background-color:#0f7a52;"></span> | `success` |
+| `focus-colour` | Focused elements only | `#ffdd00` | <span class="swatch" style="background-color:#ffdd00;"></span> | Focus styles (custom rules) |
+| `focus-text-colour` | Text on focused elements | `#0b0c0c` | <span class="swatch" style="background-color:#0b0c0c;"></span> | - |
+| `link-colour` | Links | `#1a65a6` | <span class="swatch" style="background-color:#1a65a6;"></span> | `info`, link colour |
+| `link-visited-colour` | Visited links | `#54319f` | <span class="swatch" style="background-color:#54319f;"></span> | - |
+| `link-hover-colour` | Hovered links | `#0f385c` | <span class="swatch" style="background-color:#0f385c;"></span> | `link-hover-color` |
+| `link-active-colour` | Active links | `#0b0c0c` | <span class="swatch" style="background-color:#0b0c0c;"></span> | - |
+| `border-colour` | Borders | `#cecece` | <span class="swatch" style="background-color:#cecece;"></span> | - |
+| `surface-background-colour` | Surface backgrounds | `#f4f8fb` | <span class="swatch" style="background-color:#f4f8fb;"></span> | - |
+| `surface-border-colour` | Surface borders | `#8eb8dc` | <span class="swatch" style="background-color:#8eb8dc;"></span> | - |
+| `code-background-colour` | Code blocks | `#f3f3f3` | <span class="swatch" style="background-color:#f3f3f3;"></span> | Code background |
+| `secondary-button-colour` | Secondary buttons | `#f3f3f3` | <span class="swatch" style="background-color:#f3f3f3;"></span> | `secondary` |
+| `orange` | Web palette orange | `#f47738` | <span class="swatch" style="background-color:#f47738;"></span> | `warning` |
+| `white` | Page background | `#ffffff` | <span class="swatch" style="background-color:#ffffff;"></span> | `background` |
 
-### Full palette
-
-The rest of `_brand.yml`'s palette (text, border and surface tones) has no
-Bootstrap semantic slot, so these swatches are hardcoded to the current hex
-values for display.
-
-<div class="row row-cols-2 row-cols-md-4 g-3">
-<div class="col"><div style="background-color:#0b0c0c; height: 70px; border: 1px solid #00000022;"></div><small>text-colour<br>#0b0c0c</small></div>
-<div class="col"><div style="background-color:#0b0c0c; height: 70px; border: 1px solid #00000022;"></div><small>focus-text-colour<br>#0b0c0c</small></div>
-<div class="col"><div style="background-color:#54319f; height: 70px; border: 1px solid #00000022;"></div><small>link-visited-colour<br>#54319f</small></div>
-<div class="col"><div style="background-color:#0f385c; height: 70px; border: 1px solid #00000022;"></div><small>link-hover-colour<br>#0f385c</small></div>
-<div class="col"><div style="background-color:#0b0c0c; height: 70px; border: 1px solid #00000022;"></div><small>link-active-colour<br>#0b0c0c</small></div>
-<div class="col"><div style="background-color:#cecece; height: 70px; border: 1px solid #00000022;"></div><small>border-colour<br>#cecece</small></div>
-<div class="col"><div style="background-color:#f4f8fb; height: 70px; border: 1px solid #00000022;"></div><small>surface-background-colour<br>#f4f8fb</small></div>
-<div class="col"><div style="background-color:#8eb8dc; height: 70px; border: 1px solid #00000022;"></div><small>surface-border-colour<br>#8eb8dc</small></div>
-</div>
+: {.table-sm}

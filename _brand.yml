@@ -33,13 +33,19 @@ color:
     # Not an official GOV.UK Frontend token - taken from the design
     # system site's own CSS for code blocks.
     code-background-colour: "#f3f3f3"
+    # Not official GOV.UK Frontend tokens - taken from GOV.UK's secondary
+    # button and web colour palette, so update-tokens.sh doesn't manage
+    # them. GOV.UK has no warning colour (yellow is only for focus), so
+    # warning uses palette orange.
+    secondary-button-colour: "#f3f3f3"
+    orange: "#f47738"
   foreground: text-colour
   background: "#ffffff"
   primary: brand-colour
-  secondary: secondary-text-colour
+  secondary: secondary-button-colour
   success: success-colour
   danger: error-colour
-  warning: focus-colour
+  warning: orange
   info: link-colour
 
 # GOV.UK's real typeface (GDS Transport) is *.gov.uk-only, so this uses
@@ -69,6 +75,21 @@ defaults:
     defaults:
       link-hover-color: "#0f385c" # = link-hover-colour above
       link-decoration: underline
+      # GOV.UK buttons: square corners, 2px border
+      btn-border-radius: 0
+      btn-border-radius-sm: 0
+      btn-border-radius-lg: 0
+      btn-border-width: 2px
+      # GOV.UK buttons change state instantly, with no colour fade
+      btn-transition: none
+      # Quarto callouts default to Bootstrap's own blue/green/red/yellow/
+      # orange rather than the semantic slots, so point them at the brand.
+      # Caution uses black, like GOV.UK's warning text component icon.
+      callout-color-note: $info
+      callout-color-tip: $success
+      callout-color-important: $danger
+      callout-color-warning: $warning
+      callout-color-caution: $brand-text-colour
     rules: |
       // Matches GOV.UK's link underline: thicker, offset from the text,
       // and no gaps around descenders like "g"/"y". Bootstrap's
@@ -94,8 +115,8 @@ defaults:
       // every component individually.
       :focus:focus:focus:focus:focus {
         outline: 3px solid transparent !important;
-        background-color: $warning !important;
-        box-shadow: 0 -2px $warning, 0 4px $body-color !important;
+        background-color: $brand-focus-colour !important;
+        box-shadow: 0 -2px $brand-focus-colour, 0 4px $body-color !important;
         text-decoration: none !important;
         color: $body-color !important;
       }
@@ -116,7 +137,79 @@ defaults:
       textarea:focus:focus:focus:focus:focus,
       select:focus:focus:focus:focus:focus {
         background-color: $body-bg !important;
-        outline: 3px solid $warning !important;
+        outline: 3px solid $brand-focus-colour !important;
         outline-offset: 0 !important;
         box-shadow: inset 0 0 0 2px $body-color !important;
+      }
+
+      // GOV.UK buttons: darker bottom shadow and darker hover per variant.
+      // Hex values are GOV.UK palette tints/shades (not tracked by
+      // update-tokens.sh). Success = GOV.UK default button, danger = warning
+      // button. Warning's hover text is white, as black on orange shade-25
+      // fails AA contrast.
+      $govuk-buttons: (
+        "primary":   (hover: #16548a, shadow: #0f385c, hover-text: #fff),
+        "secondary": (hover: #cecece, shadow: #858686, hover-text: $body-color),
+        "success":   (hover: #0b5c3e, shadow: #083d29, hover-text: #fff),
+        "danger":    (hover: #982828, shadow: #651b1b, hover-text: #fff),
+        "warning":   (hover: #b7592a, shadow: #7a3c1c, hover-text: #fff),
+      );
+
+      @each $name, $c in $govuk-buttons {
+        .btn-#{$name} {
+          --bs-btn-hover-bg: #{map-get($c, hover)};
+          --bs-btn-hover-border-color: #{map-get($c, hover)};
+          --bs-btn-hover-color: #{map-get($c, hover-text)};
+          --bs-btn-active-bg: #{map-get($c, hover)};
+          --bs-btn-active-border-color: #{map-get($c, hover)};
+          --bs-btn-active-color: #{map-get($c, hover-text)};
+          box-shadow: 0 2px 0 map-get($c, shadow);
+        }
+      }
+
+      // GOV.UK's secondary button uses near-black text, not Bootstrap's #000.
+      .btn-secondary {
+        --bs-btn-color: #{$body-color};
+      }
+
+      // Info is GOV.UK's inverse button (white, brand-blue text) rather
+      // than a second blue button. Only the button changes - the info
+      // colour itself still drives alerts, callouts and bg-info.
+      // A brand-blue border keeps it visible on white backgrounds.
+      .btn-info {
+        --bs-btn-bg: #fff;
+        --bs-btn-border-color: #{$primary};
+        --bs-btn-color: #{$primary};
+        --bs-btn-hover-bg: #f4f8fb;
+        --bs-btn-hover-border-color: #{$primary};
+        --bs-btn-hover-color: #{$primary};
+        --bs-btn-active-bg: #f4f8fb;
+        --bs-btn-active-border-color: #{$primary};
+        --bs-btn-active-color: #{$primary};
+        box-shadow: 0 2px 0 #0f385c;
+      }
+
+      // Pressed state, as GOV.UK's .govuk-button:active.
+      .btn:active {
+        position: relative;
+        top: 2px;
+      }
+
+      // GOV.UK button focus, overriding the general focus rule above (one
+      // extra class for specificity). Focused: solid yellow including the
+      // border, black text, 2px black shadow beneath.
+      .btn:focus:focus:focus:focus:focus {
+        background-color: $brand-focus-colour !important;
+        border-color: $brand-focus-colour !important;
+        color: $brand-focus-text-colour !important;
+        box-shadow: 0 2px 0 $brand-focus-text-colour !important;
+      }
+
+      // Pressed or hovered while focused: the button keeps its own colour,
+      // with a yellow border and no shadow, as .govuk-button:focus.
+      .btn:focus:focus:focus:focus:focus:active,
+      .btn:focus:focus:focus:focus:focus:hover {
+        background-color: var(--bs-btn-hover-bg) !important;
+        color: var(--bs-btn-hover-color) !important;
+        box-shadow: inset 0 0 0 1px $brand-focus-colour !important;
       }

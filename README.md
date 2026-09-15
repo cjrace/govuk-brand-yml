@@ -108,7 +108,7 @@ file instead, like the one below. The navbar rule needs
 #toc > .nav a.nav-link:hover,
 #toc > .nav a.nav-link:focus {
   color: $body-color;
-  background-color: $warning;
+  background-color: $brand-focus-colour;
 }
 ```
 
