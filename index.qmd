@@ -106,7 +106,7 @@ rows in sync.
 |---|---|---|---|---|
 | `brand-colour` | Brand elements, e.g. header | `#1d70b8` | <span class="swatch" style="background-color:#1d70b8;"></span> | `primary` |
 | `text-colour` | Default text | `#0b0c0c` | <span class="swatch" style="background-color:#0b0c0c;"></span> | `foreground` (body text) |
-| `secondary-text-colour` | Secondary text | `#484949` | <span class="swatch" style="background-color:#484949;"></span> | - |
+| `secondary-text-colour` | Secondary text | `#484949` | <span class="swatch" style="background-color:#484949;"></span> | `secondary` (muted text, placeholders) |
 | `error-colour` | Error messages | `#ca3535` | <span class="swatch" style="background-color:#ca3535;"></span> | `danger` |
 | `success-colour` | Success messages | `#0f7a52` | <span class="swatch" style="background-color:#0f7a52;"></span> | `success` |
 | `focus-colour` | Focused elements only | `#ffdd00` | <span class="swatch" style="background-color:#ffdd00;"></span> | Focus styles (custom rules) |
@@ -119,7 +119,7 @@ rows in sync.
 | `surface-background-colour` | Surface backgrounds | `#f4f8fb` | <span class="swatch" style="background-color:#f4f8fb;"></span> | - |
 | `surface-border-colour` | Surface borders | `#8eb8dc` | <span class="swatch" style="background-color:#8eb8dc;"></span> | - |
 | `code-background-colour` | Code blocks | `#f3f3f3` | <span class="swatch" style="background-color:#f3f3f3;"></span> | Code background |
-| `secondary-button-colour` | Secondary buttons | `#f3f3f3` | <span class="swatch" style="background-color:#f3f3f3;"></span> | `secondary` |
+| `secondary-button-colour` | Secondary buttons | `#f3f3f3` | <span class="swatch" style="background-color:#f3f3f3;"></span> | `.btn-secondary` (custom rules) |
 | `orange` | Web palette orange | `#f47738` | <span class="swatch" style="background-color:#f47738;"></span> | `warning` |
 | `white` | Page background | `#ffffff` | <span class="swatch" style="background-color:#ffffff;"></span> | `background` |
 

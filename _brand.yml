@@ -42,7 +42,10 @@ color:
   foreground: text-colour
   background: "#ffffff"
   primary: brand-colour
-  secondary: secondary-button-colour
+  # brand.yml defines secondary as lighter text, and bslib and Quarto use it
+  # for muted text and placeholders, so it stays a text colour. The grey
+  # secondary button colour is applied to .btn-secondary in rules below.
+  secondary: secondary-text-colour
   success: success-colour
   danger: error-colour
   warning: orange
@@ -85,10 +88,13 @@ defaults:
       # Quarto callouts default to Bootstrap's own blue/green/red/yellow/
       # orange rather than the semantic slots, so point them at the brand.
       # Caution uses black, like GOV.UK's warning text component icon.
-      callout-color-note: $info
-      callout-color-tip: $success
-      callout-color-important: $danger
-      callout-color-warning: $warning
+      # These use palette variables, not $info etc., because bslib writes
+      # brand.defaults before brand.color, so the semantic slots don't
+      # exist yet here.
+      callout-color-note: $brand-link-colour # = info
+      callout-color-tip: $brand-success-colour # = success
+      callout-color-important: $brand-error-colour # = danger
+      callout-color-warning: $brand-orange # = warning
       callout-color-caution: $brand-text-colour
     rules: |
       // Matches GOV.UK's link underline: thicker, offset from the text,
@@ -130,6 +136,15 @@ defaults:
         background-color: transparent !important;
       }
 
+      // The navbar toggler's icon is a background image, so the forced
+      // text colour above can't reach it and it stays white on yellow.
+      // Swap in a focus-text-colour icon and drop any filter a site uses
+      // to invert it (e.g. pkgdown's extra.scss).
+      .navbar-toggler:focus:focus:focus:focus:focus .navbar-toggler-icon {
+        background-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$brand-focus-text-colour}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>")) !important;
+        filter: none !important;
+      }
+
       // Inputs keep their own background and get an outline instead of
       // a fill, matching GOV.UK's outline-only input focus style. The
       // type selector wins over the general focus rule above.
@@ -167,9 +182,15 @@ defaults:
         }
       }
 
-      // GOV.UK's secondary button uses near-black text, not Bootstrap's #000.
+      // GOV.UK's secondary button: light grey with near-black text. Set here
+      // rather than via `secondary`, which brand.yml reserves for lighter text.
       .btn-secondary {
+        --bs-btn-bg: #{$brand-secondary-button-colour};
+        --bs-btn-border-color: #{$brand-secondary-button-colour};
         --bs-btn-color: #{$body-color};
+        --bs-btn-disabled-bg: #{$brand-secondary-button-colour};
+        --bs-btn-disabled-border-color: #{$brand-secondary-button-colour};
+        --bs-btn-disabled-color: #{$body-color};
       }
 
       // Info is GOV.UK's inverse button (white, brand-blue text) rather
@@ -189,10 +210,11 @@ defaults:
         box-shadow: 0 2px 0 #0f385c;
       }
 
-      // Pressed state, as GOV.UK's .govuk-button:active.
+      // Pressed state, as GOV.UK's .govuk-button:active. Uses transform
+      // rather than GOV.UK's position/top, so absolutely positioned buttons
+      // (e.g. pkgdown and Quarto code copy buttons) don't jump on click.
       .btn:active {
-        position: relative;
-        top: 2px;
+        transform: translateY(2px);
       }
 
       // GOV.UK button focus, overriding the general focus rule above (one
@@ -212,4 +234,12 @@ defaults:
         background-color: var(--bs-btn-hover-bg) !important;
         color: var(--bs-btn-hover-color) !important;
         box-shadow: inset 0 0 0 1px $brand-focus-colour !important;
+      }
+
+      // Child elements (e.g. the icon in pkgdown's copy button) would keep
+      // the black forced by the focus rule above, which is unreadable while
+      // the button holds its own colour, so follow the button's text colour.
+      .btn:focus:focus:focus:focus:focus:active *,
+      .btn:focus:focus:focus:focus:focus:hover * {
+        color: var(--bs-btn-hover-color) !important;
       }

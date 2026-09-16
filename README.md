@@ -79,6 +79,21 @@ file instead, like the one below. The navbar rule needs
   background-color: $primary !important;
 }
 
+// Bootstrap's own navbar colours are near-black, and its
+// `.nav-link.show`/`.active` rules out-specify the white colour set below,
+// leaving an open dropdown's toggle dark on blue once focus moves. Setting
+// the variables keeps every state white instead. pkgdown marks the navbar
+// `data-bs-theme="light"`, and Bootstrap themes these variables on that same
+// attribute, so the selector has to match it to win.
+.navbar,
+.navbar[data-bs-theme] {
+  --bs-navbar-color: #fff;
+  --bs-navbar-hover-color: #fff;
+  --bs-navbar-active-color: #fff;
+  --bs-navbar-brand-color: #fff;
+  --bs-navbar-brand-hover-color: #fff;
+}
+
 .navbar-brand,
 .navbar-nav .nav-link,
 .navbar-nav .dropdown-toggle {
@@ -109,6 +124,16 @@ file instead, like the one below. The navbar rule needs
 #toc > .nav a.nav-link:focus {
   color: $body-color;
   background-color: $brand-focus-colour;
+}
+
+// Search suggestions, matching GOV.UK's accessible-autocomplete: brand blue
+// with white text. pkgdown only styles :hover (a grey tint), leaving the
+// keyboard-highlighted suggestion (.aa-cursor) with no highlight at all, so
+// both are set here.
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:hover,
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  color: #fff;
+  background-color: $primary;
 }
 ```
 
