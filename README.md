@@ -117,9 +117,22 @@ file instead, like the one below. The navbar rule needs
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus,
 .navbar-nav .dropdown-toggle:hover,
-.navbar-nav .dropdown-toggle:focus,
+.navbar-nav .dropdown-toggle:focus {
+  color: $body-color;
+  background-color: $brand-focus-colour;
+}
+
+// Same black-on-yellow hover as the top-level nav links, replacing
+// pkgdown's default grey.
 .dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item:focus {
+  color: $body-color;
+  background-color: $brand-focus-colour;
+}
+
+// Replaces the sidebar's default blue tint with the same yellow focus
+// style used elsewhere. Selector shape must match pkgdown's own to win
+// the cascade.
 #toc > .nav a.nav-link:hover,
 #toc > .nav a.nav-link:focus {
   color: $body-color;
@@ -129,12 +142,26 @@ file instead, like the one below. The navbar rule needs
 // Search suggestions, matching GOV.UK's accessible-autocomplete: brand blue
 // with white text. pkgdown only styles :hover (a grey tint), leaving the
 // keyboard-highlighted suggestion (.aa-cursor) with no highlight at all, so
-// both are set here.
+// both are set here. Selector shape matches pkgdown's own to win the cascade.
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:hover,
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
   color: #fff;
   background-color: $primary;
 }
+```
+
+Consider crediting this repo in your site's footer, the way
+[shinyGovstyle](https://github.com/dfe-analytical-services/shinyGovstyle)
+does:
+
+```yaml
+# _pkgdown.yml
+footer:
+  structure:
+    left: developed_by
+    right: [styled_by, built_with]
+  components:
+    styled_by: "Styled with [govuk-brand-yml](https://github.com/cjrace/govuk-brand-yml)."
 ```
 
 This gives the navbar a solid GOV.UK blue background, white nav links and

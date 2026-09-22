@@ -112,9 +112,9 @@ rows in sync.
 | `focus-colour` | Focused elements only | `#ffdd00` | <span class="swatch" style="background-color:#ffdd00;"></span> | Focus styles (custom rules) |
 | `focus-text-colour` | Text on focused elements | `#0b0c0c` | <span class="swatch" style="background-color:#0b0c0c;"></span> | - |
 | `link-colour` | Links | `#1a65a6` | <span class="swatch" style="background-color:#1a65a6;"></span> | `info`, link colour |
-| `link-visited-colour` | Visited links | `#54319f` | <span class="swatch" style="background-color:#54319f;"></span> | - |
+| `link-visited-colour` | Visited links | `#54319f` | <span class="swatch" style="background-color:#54319f;"></span> | Custom rules (`a:visited`) |
 | `link-hover-colour` | Hovered links | `#0f385c` | <span class="swatch" style="background-color:#0f385c;"></span> | `link-hover-color` |
-| `link-active-colour` | Active links | `#0b0c0c` | <span class="swatch" style="background-color:#0b0c0c;"></span> | - |
+| `link-active-colour` | Active links | `#0b0c0c` | <span class="swatch" style="background-color:#0b0c0c;"></span> | Custom rules (`a:active`) |
 | `border-colour` | Borders | `#cecece` | <span class="swatch" style="background-color:#cecece;"></span> | - |
 | `surface-background-colour` | Surface backgrounds | `#f4f8fb` | <span class="swatch" style="background-color:#f4f8fb;"></span> | - |
 | `surface-border-colour` | Surface borders | `#8eb8dc` | <span class="swatch" style="background-color:#8eb8dc;"></span> | - |
