@@ -37,6 +37,10 @@ If you're adding this to an R package (for example, to theme a pkgdown
 site), put `_brand.yml` inside the package's `inst/` folder instead, so
 that checking the package doesn't produce a note.
 
+If your package also has a Shiny app in `inst/` that you don't want using the theme, rename the file to
+something else, such as `govuk-brand.yml` to prevent auto-loading. You can also add
+`brand = FALSE` to the app's `bslib::bs_theme()` call to be sure it's ignored.
+
 ### 2. Point your project at it
 
 **Quarto:**
@@ -64,6 +68,8 @@ template:
   bslib:
     brand: inst/_brand.yml
 ```
+
+If you renamed the file, use that name here instead.
 
 **pkgdown's navbar doesn't inherit these colours automatically.** pkgdown
 compiles its own navbar/dropdown/TOC Sass *after* `_brand.yml`, which
